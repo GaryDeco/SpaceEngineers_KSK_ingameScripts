@@ -19,57 +19,47 @@ namespace IngameScript
 {
     partial class Program : MyGridProgram
     {
-        // This file contains your actual script.
-        //
-        // You can either keep all your code here, or you can create separate
-        // code files to make your program easier to navigate while coding.
-        //
-        // In order to add a new utility class, right-click on your project, 
-        // select 'New' then 'Add Item...'. Now find the 'Space Engineers'
-        // category under 'Visual C# Items' on the left hand side, and select
-        // 'Utility Class' in the main area. Name it in the box below, and
-        // press OK. This utility class will be merged in with your code when
-        // deploying your final script.
-        //
-        // You can also simply create a new utility class manually, you don't
-        // have to use the template if you don't want to. Just do so the first
-        // time to see what a utility class looks like.
+
 
         public Program()
         {
-            // The constructor, called only once every session and
-            // always before any other method is called. Use it to
-            // initialize your script. 
-            //     
-            // The constructor is optional and can be removed if not
-            // needed.
-            // 
-            // It's recommended to set RuntimeInfo.UpdateFrequency 
-            // here, which will allow your script to run itself without a 
-            // timer block.
+
         }
 
         public void Save()
         {
-            // Called when the program needs to save its state. Use
-            // this method to save your state to the Storage field
-            // or some other means. 
-            // 
-            // This method is optional and can be removed if not
-            // needed.
+
         }
 
         public void Main(string argument, UpdateType updateSource)
         {
-            // The main entry point of the script, invoked every time
-            // one of the programmable block's Run actions are invoked,
-            // or the script updates itself. The updateSource argument
-            // describes where the update came from. Be aware that the
-            // updateSource is a  bitfield  and might contain more than 
-            // one update type.
-            // 
-            // The method itself is required, but the arguments above
-            // can be removed if not needed.
+            List<IMyTerminalBlock> allMyBlocks = new List<IMyTerminalBlock>(); // New list containing all blocks on the grid
+            List<IMyTextPanel> allMyTextPanels = new List<IMyTextPanel>(); // New list containing all LCD screens on the grid
+            allMyBlocks.AddRange(allMyTextPanels); // list of LCDs is now a list under my list containing all blocks on the grid
+
+            GridTerminalSystem.GetBlocksOfType(allMyTextPanels); // retrieves my list of LCDs
+
+            if (allMyTextPanels.Count == 0) // If there is nothing in my list
+            {
+                Echo("No Text Panels Found"); // display this on my programmable block hud
+            }
+            else if (allMyTextPanels.Count > 0) // and if there are LCDs in my list
+            {
+                Echo("Found Text Panels"); // display this on my programmable block hud
+                Echo(" "); // an empty space
+
+                foreach (IMyTextPanel textPanel in allMyTextPanels) // for each LCD in my list of LCDs
+                {
+                    Echo(textPanel.CustomName); // display its custom name on my programmable block hud
+
+                    if (textPanel.CustomName.Contains("LCD1")) // if there is text in one of my LCDs containing "LCD1"
+                    {
+                        string text = "Hello World!"; // assigns a message string to a variable named text
+
+                        textPanel.WritePublicText(text); // write the text to the LCD meeting the previously defined conditions
+                    }
+                }
+            }
         }
     }
 }
