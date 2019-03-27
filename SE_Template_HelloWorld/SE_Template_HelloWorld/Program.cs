@@ -41,11 +41,11 @@ namespace IngameScript
 
             if (allMyTextPanels.Count == 0) // If there is nothing in my list
             {
-                Echo("No Text Panels Found"); // display this on my programmable block hud
+                Echo("No LCD's on this grid"); // display this on my programmable block hud
             }
             else if (allMyTextPanels.Count > 0) // and if there are LCDs in my list
             {
-                Echo("Found Text Panels"); // display this on my programmable block hud
+                Echo("Located LCD's"); // display this on my programmable block hud
                 Echo(" "); // an empty space
 
                 foreach (IMyTextPanel textPanel in allMyTextPanels) // for each LCD in my list of LCDs
