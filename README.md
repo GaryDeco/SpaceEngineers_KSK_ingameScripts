@@ -23,7 +23,7 @@ Welcome to Kozmik Space Korps!
   
   Coming Soon........
   
-  - Wiki page with some learning resources.
+  - Wiki page with some learning resources. <https://github.com/DekozmicMayhem/SpaceEngineers_KSK_ingameScripts/wiki>
   - SE API list
   - More script templates
   - Some spreadsheets with useful data for calculations in the code. 
